@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://b1xy23twwghas"
+path="res://.godot/imported/mindscape.dialogue-bd26d6554d095758c2172a731dfb95eb.tres"
+
+[deps]
+
+source_file="res://dialogues/mindscape.dialogue"
+dest_files=["res://.godot/imported/mindscape.dialogue-bd26d6554d095758c2172a731dfb95eb.tres"]
+
+[params]
+
+defaults=true

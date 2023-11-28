@@ -1,0 +1,147 @@
+[gd_scene load_steps=20 format=3 uid="uid://bktf6jlsdyvcy"]
+
+[ext_resource type="Script" path="res://scripts/bossScript.gd" id="1_xaslj"]
+[ext_resource type="Texture2D" uid="uid://b0ikjgigtwglg" path="res://assests/enemy/boss/goblin_idle_spritesheet.png" id="2_hj07i"]
+[ext_resource type="Texture2D" uid="uid://ckeq4cwfq8uvs" path="res://assests/enemy/boss/goblin_run_spritesheet.png" id="3_avqia"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cv5b7"]
+atlas = ExtResource("2_hj07i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp5eh"]
+atlas = ExtResource("2_hj07i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seabc"]
+atlas = ExtResource("2_hj07i")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydofd"]
+atlas = ExtResource("2_hj07i")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw6gn"]
+atlas = ExtResource("2_hj07i")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eityr"]
+atlas = ExtResource("2_hj07i")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfdyw"]
+atlas = ExtResource("3_avqia")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoawk"]
+atlas = ExtResource("3_avqia")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd83m"]
+atlas = ExtResource("3_avqia")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_760sj"]
+atlas = ExtResource("3_avqia")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnugy"]
+atlas = ExtResource("3_avqia")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvs2f"]
+atlas = ExtResource("3_avqia")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kjwbj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cv5b7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp5eh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seabc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydofd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw6gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eityr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfdyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoawk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd83m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_760sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnugy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvs2f")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65ip7"]
+radius = 20.204
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4xgwn"]
+radius = 6.8
+height = 19.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bv8hn"]
+radius = 8.4
+
+[node name="boss" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_xaslj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 1)
+scale = Vector2(1.215, 1.356)
+sprite_frames = SubResource("SpriteFrames_kjwbj")
+animation = &"run"
+
+[node name="player_find" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_find"]
+position = Vector2(-1.6, 0.4)
+shape = SubResource("CircleShape2D_65ip7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.4, 0.2)
+shape = SubResource("CapsuleShape2D_4xgwn")
+
+[node name="hittyboxy" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hittyboxy"]
+position = Vector2(-0.8, 0.4)
+shape = SubResource("CircleShape2D_bv8hn")
+
+[node name="attack_cooldown" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="player_find" to="." method="_on_player_find_body_entered"]
+[connection signal="body_exited" from="player_find" to="." method="_on_player_find_body_exited"]
+[connection signal="body_entered" from="hittyboxy" to="." method="_on_hittyboxy_body_entered"]
+[connection signal="body_exited" from="hittyboxy" to="." method="_on_hittyboxy_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

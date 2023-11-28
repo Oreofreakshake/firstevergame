@@ -1,0 +1,24 @@
+~ npc_interaction
+
+if global.slimes_defeated == true:
+	Slime?: [[Hi|Hello]]... I'm sorry for the trouble
+	- who or what are you?
+		Slime?: I am a part of you... you can call me loneliness... you will understand once you walk towards the sign....
+		
+		- where am I?
+			Slime?: An island hidden from the human eyes
+			- Explain
+				Slime?: walk towards the sign, you will understand....
+		- Okay => END
+	- bye => END
+else:
+	Slime?: Go fight!
+
+=> END
+
+
+
+~ start
+ww...where am i??
+I don't remember anything let's look around
+=> END

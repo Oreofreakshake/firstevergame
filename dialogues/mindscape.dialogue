@@ -1,0 +1,30 @@
+~ start
+
+HUH?
+where am i?
+looks like "that" place except it's night time here?.... i think... it's also very empty....
+let's look for clues....
+
+=> END
+
+
+
+~ npc_interaction
+
+if answer_right == false:
+	Memory: [[Hi|Hello]]... I'm your memory.... technically....
+	Memory: Solve my riddle to leave!
+	- Okay
+		Memeory: Given the key of 4, what is "iuopey iejzoywla"
+		- Hidden Island
+			Memory: Nope! wrong!
+		- Whitespace
+			Memory: Nope! wrong!
+		- Mystic Mindscape
+			Memory: Correct! you can leave now.... however, be careful on your way out.... straight ahead lies your depression you fear so much.... you fight it and you will surely die!..... try to ESCAPE IT.... goodluck....
+			set global.answer_right = true
+	- No => END
+else:
+	Memory: You have solve the riddle, you can leave this memory now....
+	
+=> END
